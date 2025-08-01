@@ -1,0 +1,34 @@
+<form [formGroup]="cadastroForm" (ngSubmit)="enviar()">
+    <input type="text" formControlName="nomecompleto" placeholder="Nome" /> <br>
+    <input type="number" formControlName="salario" placeholder="Salário" /> <br>
+    <input type="text" formControlName="cargo" placeholder="Cargo" /> <br>
+    <input type="number" formControlName="numerodependentes" placeholder="Dependentes" /> <br>
+    Vale Transporte: <br>
+   Sim <input type="radio" formControlName="vt" value="Sim"/> 
+   Não <input type="radio" formControlName="vt" value="Não" />
+
+    <button type="submit">Enviar</button>
+</form>
+
+<p *ngIf="cadastroForm.get('nomecompleto')?.errors?.['required'] || cadastroForm.get('nomecompleto')?.errors?.['minlength']">
+    Nome é obrigatório <br>
+    Nome deve conter pelo menos 10 caracteres
+</p>
+
+<p *ngIf="cadastroForm.get('salario')?.errors?.['min'] || cadastroForm.get('salario')?.errors?.['required']" >
+    Salário é obrigatório <br>
+    Salário deve ser maior que 1518
+</p>
+
+<p *ngIf="cadastroForm.get('cargo')?.errors?.['required']" >
+    Cargo é obrigatório
+</p>
+
+
+<p *ngIf="cadastroForm.get('numerodependentes')?.errors?.['min'] || cadastroForm.get('numerodependentes')?.errors?.['max'] ||cadastroForm.get('numerodependentes')?.errors?.['required']" >
+    Dependentes minimo é 0 e máximo é 4 <br>
+</p>
+
+<p *ngIf="cadastroForm.get('vt')?.errors?.['required']" >
+    Vale Transporte é obrigatório
+</p>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-funcionario',
@@ -16,11 +17,22 @@ export class CadastroFuncionario {
     vt: new FormControl('', Validators.required)
   });
 
-  enviar() {
-    if (this.cadastroForm.valid) {
-      console.log('Cadastro feito com sucesso!', this.cadastroForm.value);
-    } else {
-      console.log('Formulario inválido.');
-    }
+
+enviar() {
+  if (this.cadastroForm.valid) {
+    console.log('Cadastro feito com sucesso!', this.cadastroForm.value);
+  } else {
+    console.log('Formulario inválido.');
   }
+}
+
+usuario: any;
+nivel: any;
+
+ngOnInit(): void {
+  this.usuario = history.state.usuario;
+  this.nivel = history.state.nivel;
+  console.log(this.usuario, this.nivel);
+}
+
 }

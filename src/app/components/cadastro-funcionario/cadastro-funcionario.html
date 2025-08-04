@@ -7,9 +7,9 @@
    Sim <input type="radio" formControlName="vt" value="Sim"/> 
    Não <input type="radio" formControlName="vt" value="Não" />
 
-    <button type="submit">Enviar</button>
-</form>
+    <button type="submit" *ngIf="nivel === 'admin'">Cadastrar</button>
 
+</form>
 <p *ngIf="cadastroForm.get('nomecompleto')?.errors?.['required'] || cadastroForm.get('nomecompleto')?.errors?.['minlength']">
     Nome é obrigatório <br>
     Nome deve conter pelo menos 10 caracteres
@@ -32,3 +32,5 @@
 <p *ngIf="cadastroForm.get('vt')?.errors?.['required']" >
     Vale Transporte é obrigatório
 </p>
+
+    <router-outlet></router-outlet>

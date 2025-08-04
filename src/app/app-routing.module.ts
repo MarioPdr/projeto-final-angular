@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CadastroFuncionario } from './components/cadastro-funcionario/cadastro-funcionario.component';
 import { HomeComponent } from './components/home/home.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { ConfiguracoesComponent } from './components/configuracoes/configuracoes.component';
+import { ListaFuncionariosComponent } from './lista-funcionarios/lista-funcionarios.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -11,6 +14,14 @@ const routes: Routes = [
     component: CadastroFuncionario,
     children: [
       { path: 'usuarios', component: UsuariosComponent }
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      { path: 'configuracoes', component: ConfiguracoesComponent },
+      { path: 'lista', component: ListaFuncionariosComponent},
     ]
   }
 ];

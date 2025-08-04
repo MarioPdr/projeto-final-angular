@@ -16,7 +16,13 @@ export class HomeComponent {
     });
   }
 
+  login() {
+  this.router.navigate(['/admin'], {
+    state: {
+      usuario: 'Mario',
+      nivel: 'admin'
+    }
+  });
 
-
-
-}
+  }
+}                  

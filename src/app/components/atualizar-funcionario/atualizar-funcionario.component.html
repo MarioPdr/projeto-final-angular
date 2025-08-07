@@ -1,11 +1,11 @@
-<form [formGroup]="cadastroForm" (ngSubmit)="enviar()" class="form-container">
+<form [formGroup]="atualizarForm" (ngSubmit)="enviar()" class="form-container">
   <mat-form-field appearance="outline">
     <mat-label>Nome Completo</mat-label>
     <input matInput formControlName="nomecompleto" placeholder="Digite o nome completo">
-    <mat-error *ngIf="cadastroForm.get('nomecompleto')?.errors?.['required']">
+    <mat-error *ngIf="atualizarForm.get('nomecompleto')?.errors?.['required']">
       Nome é obrigatório
     </mat-error>
-    <mat-error *ngIf="cadastroForm.get('nomecompleto')?.errors?.['minlength']">
+    <mat-error *ngIf="atualizarForm.get('nomecompleto')?.errors?.['minlength']">
       Nome deve conter pelo menos 10 caracteres
     </mat-error>
   </mat-form-field> <br>
@@ -13,10 +13,10 @@
   <mat-form-field appearance="outline">
     <mat-label>Salário</mat-label>
     <input matInput type="number" formControlName="salario" placeholder="Digite o salário">
-    <mat-error *ngIf="cadastroForm.get('salario')?.errors?.['required']">
+    <mat-error *ngIf="atualizarForm.get('salario')?.errors?.['required']">
       Salário é obrigatório
     </mat-error>
-    <mat-error *ngIf="cadastroForm.get('salario')?.errors?.['min']">
+    <mat-error *ngIf="atualizarForm.get('salario')?.errors?.['min']">
       Salário deve ser maior que 1518
     </mat-error>
   </mat-form-field> <br>
@@ -24,7 +24,7 @@
   <mat-form-field appearance="outline">
     <mat-label>Cargo</mat-label>
     <input matInput formControlName="cargo" placeholder="Digite o cargo">
-    <mat-error *ngIf="cadastroForm.get('cargo')?.errors?.['required']">
+    <mat-error *ngIf="atualizarForm.get('cargo')?.errors?.['required']">
       Cargo é obrigatório
     </mat-error>
   </mat-form-field> <br>
@@ -32,24 +32,22 @@
   <mat-form-field appearance="outline">
     <mat-label>Número de Dependentes</mat-label>
     <input matInput type="number" formControlName="numerodependentes" placeholder="Digite o número">
-    <mat-error *ngIf="cadastroForm.get('numerodependentes')?.errors?.['required']">
+    <mat-error *ngIf="atualizarForm.get('numerodependentes')?.errors?.['required']">
       Dependentes é obrigatório
     </mat-error>
-    <mat-error *ngIf="cadastroForm.get('numerodependentes')?.errors?.['min'] || cadastroForm.get('numerodependentes')?.errors?.['max']">
+    <mat-error *ngIf="atualizarForm.get('numerodependentes')?.errors?.['min'] || atualizarForm.get('numerodependentes')?.errors?.['max']">
       Dependentes mínimo é 0 e máximo é 4
     </mat-error>
   </mat-form-field> <br>
- 
+
   <mat-label>Vale Transporte</mat-label>
   <mat-radio-group formControlName="vt" class="radio-group">
     <mat-radio-button value="Sim">Sim</mat-radio-button>
     <mat-radio-button value="Não">Não</mat-radio-button>
   </mat-radio-group>
-  <mat-error *ngIf="cadastroForm.get('vt')?.errors?.['required']" class="radio-error">
+  <mat-error *ngIf="atualizarForm.get('vt')?.errors?.['required']" class="radio-error">
     Vale Transporte é obrigatório
   </mat-error> <br>
 
-  <button mat-raised-button color="primary" type="submit" *ngIf="nivel === 'admin'">Cadastrar</button>
+  <button mat-raised-button color="primary" type="submit">Atualizar</button>
 </form>
-
-<router-outlet></router-outlet>

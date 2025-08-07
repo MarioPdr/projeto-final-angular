@@ -1,0 +1,18 @@
+<mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" (click)="irMenu()"></mat-icon>
+
+<button mat-button [matMenuTriggerFor]="profileMenu">Profile</button>
+<mat-menu #profileMenu="matMenu">
+  <button mat-menu-item disabled>Usuário: {{ userName }}</button>
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu> <br>
+
+<section>
+  <div class="example-button-row">
+    <button mat-raised-button (click)="cadastroFuncionario()">cadastro de Funcionario</button> <br>
+    <button mat-raised-button (click)="atualizarFuncionario()">Atualizar Cadastro</button> <br>
+    <button mat-raised-button (click)="listaFuncionarios()">Lista de Funcionários</button> <br>
+    <button mat-raised-button (click)="configuracoes()">Configurações</button>
+    
+  </div>
+</section>
+<router-outlet></router-outlet>

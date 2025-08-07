@@ -5,23 +5,21 @@ import { HomeComponent } from './components/home/home.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ConfiguracoesComponent } from './components/configuracoes/configuracoes.component';
-import { ListaFuncionariosComponent } from './lista-funcionarios/lista-funcionarios.component';
+import { ListaFuncionariosComponent } from './components/lista-funcionarios/lista-funcionarios.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AtualizarFuncionarioComponent } from './components/atualizar-funcionario/atualizar-funcionario.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'cadastrofuncionario', component: CadastroFuncionario },
+  { path: 'atualizarfuncionario', component: AtualizarFuncionarioComponent },
   {
-    path: 'formulario',
-    component: CadastroFuncionario,
-    children: [
-      { path: 'usuarios', component: UsuariosComponent }
-    ]
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
+    path: 'menu',
+    component: MenuComponent,
     children: [
       { path: 'configuracoes', component: ConfiguracoesComponent },
-      { path: 'lista', component: ListaFuncionariosComponent},
+      { path: 'listafuncionarios', component: ListaFuncionariosComponent },
+      { path: 'profile', component: ProfileComponent }
     ]
   }
 ];

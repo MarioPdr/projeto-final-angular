@@ -8,9 +8,23 @@ import { HomeComponent } from './components/home/home.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ConfiguracoesComponent } from './components/configuracoes/configuracoes.component';
-import { ListaFuncionariosComponent } from './lista-funcionarios/lista-funcionarios.component';
+import { ListaFuncionariosComponent } from './components/lista-funcionarios/lista-funcionarios.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { ComponentLifecycleComponent } from './components/component-lifecycle/component-lifecycle.component';
+import { AtualizarFuncionarioComponent } from './components/atualizar-funcionario/atualizar-funcionario.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +34,11 @@ import { MatTableModule } from '@angular/material/table';
     AppComponent,
     AdminComponent,
     ConfiguracoesComponent,
-    ListaFuncionariosComponent
+    ListaFuncionariosComponent,
+    ComponentLifecycleComponent,
+    AtualizarFuncionarioComponent,
+    MenuComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +46,17 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     FormsModule,
     MatTableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

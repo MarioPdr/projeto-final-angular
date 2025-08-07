@@ -23,6 +23,12 @@ export class HomeComponent {
       nivel: 'admin'
     }
   });
-
   }
+menu() {
+  this.router.navigate(['/menu'], {
+  });
+  }
+
+
+
 }                  

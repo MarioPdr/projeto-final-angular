@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-funcionarios',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./lista-funcionarios.component.css']
 })
 export class ListaFuncionariosComponent {
- funcionarios: string[] = ['id', 'nome', 'cpf', 'cargo_atual', 'salario_atual', 'opcaoVT'];
+  funcionarios: string[] = ['id', 'nome', 'cpf', 'cargo_atual', 'salario_atual', 'opcaoVT'];
   informacoes = [
     {
       id: 1025,
@@ -25,4 +26,9 @@ export class ListaFuncionariosComponent {
       opcaoVT: false
     }
   ];
+  constructor(private router: Router) { }
+
+  editarFuncionario(id: number) {
+    this.router.navigate(['/atualizar-funcionario'], { queryParams: { id } });
+  }
 }

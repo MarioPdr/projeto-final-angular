@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastroFuncionario } from './components/cadastro-funcionario/cadastro-funcionario.component';
-import { HomeComponent } from './components/home/home.component';
-import { UsuariosComponent } from './components/usuarios/usuarios.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { ConfiguracoesComponent } from './components/configuracoes/configuracoes.component';
 import { ListaFuncionariosComponent } from './components/lista-funcionarios/lista-funcionarios.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -12,7 +9,7 @@ import { AtualizarFuncionarioComponent } from './components/atualizar-funcionari
 
 const routes: Routes = [
   { path: 'cadastrofuncionario', component: CadastroFuncionario },
-  { path: 'atualizarfuncionario', component: AtualizarFuncionarioComponent },
+  { path: 'atualizar-funcionario', component: AtualizarFuncionarioComponent },
   {
     path: 'menu',
     component: MenuComponent,

@@ -25,7 +25,8 @@ export class MenuComponent {
   }
 
   configuracoes() {
-    this.router.navigate(['/menu/configuracoes']);
+    this.router.navigate(['/menu/configuracoes'], { state: { usuario: 'Pedro', nivel: 'admin' } });
+
   }
 
   listaFuncionarios() {
@@ -39,5 +40,5 @@ export class MenuComponent {
   atualizarFuncionario() {
     this.router.navigate(['/atualizarfuncionario']);
   }
-
+  showFiller = false;
 }

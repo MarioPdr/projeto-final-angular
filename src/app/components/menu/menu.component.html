@@ -1,18 +1,37 @@
-<mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" (click)="irMenu()"></mat-icon>
+<mat-drawer-container class="example-container" autosize> 
+  <mat-icon fontIcon="home" (click)="irMenu()" class="custom-home"></mat-icon>
 
-<button mat-button [matMenuTriggerFor]="profileMenu">Profile</button>
-<mat-menu #profileMenu="matMenu">
-  <button mat-menu-item disabled>Usuário: {{ userName }}</button>
-  <button mat-menu-item (click)="logout()">Logout</button>
-</mat-menu> <br>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
 
-<section>
-  <div class="example-button-row">
-    <button mat-raised-button (click)="cadastroFuncionario()">cadastro de Funcionario</button> <br>
-    <button mat-raised-button (click)="atualizarFuncionario()">Atualizar Cadastro</button> <br>
-    <button mat-raised-button (click)="listaFuncionarios()">Lista de Funcionários</button> <br>
+    <button mat-button [matMenuTriggerFor]="profileMenu">Profile</button>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item disabled>Usuário: {{ userName }}</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+
+     <div class="example-button-row button-custom">
+    <button mat-raised-button (click)="cadastroFuncionario()">Cadastro de
+      Funcionário</button> <br>
+    <button mat-raised-button (click)="atualizarFuncionario()">Atualizar
+      Cadastro</button> <br>
+    <button mat-raised-button (click)="listaFuncionarios()">Lista de
+      Funcionários</button> <br>
     <button mat-raised-button (click)="configuracoes()">Configurações</button>
-    
   </div>
-</section>
-<router-outlet></router-outlet>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      <span class="svg-icon">
+        <img src="../assets/menu-alt2-svgrepo-com.svg" alt="Abrir Menu" width="24" height="24" />
+      </span>
+    </button>
+  </div>
+  <router-outlet></router-outlet>
+</mat-drawer-container>
+
+
+
+
+
+

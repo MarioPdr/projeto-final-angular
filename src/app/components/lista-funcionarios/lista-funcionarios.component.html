@@ -7,27 +7,27 @@
 
   <ng-container matColumnDef="nome">
     <th mat-header-cell *matHeaderCellDef>Nome</th>
-    <td mat-cell *matCellDef="let row">{{ row.nome }}</td>
+    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row.id)">{{ row.nome }}</td>
   </ng-container>
 
   <ng-container matColumnDef="cpf">
     <th mat-header-cell *matHeaderCellDef>CPF</th>
-    <td mat-cell *matCellDef="let row">{{ row.cpf }}</td>
+    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row.id)">{{ row.cpf }}</td>
   </ng-container>
 
   <ng-container matColumnDef="cargo_atual">
     <th mat-header-cell *matHeaderCellDef>Cargo</th>
-    <td mat-cell *matCellDef="let row">{{ row.cargo_atual }}</td>
+    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row.id)">{{ row.cargo_atual }}</td>
   </ng-container>
 
   <ng-container matColumnDef="salario_atual">
     <th mat-header-cell *matHeaderCellDef>Salário</th>
-    <td mat-cell *matCellDef="let row">R$ {{ row.salario_atual }}</td>
+    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row.id)">R$ {{ row.salario_atual }}</td>
   </ng-container>
 
   <ng-container matColumnDef="opcaoVT">
     <th mat-header-cell *matHeaderCellDef>VT</th>
-    <td mat-cell *matCellDef="let row">{{ row.opcaoVT ? 'Sim' : 'Não' }}</td>
+    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row.id)">{{ row.opcaoVT ? 'Sim' : 'Não' }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="funcionarios"></tr>

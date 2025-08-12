@@ -1,37 +1,58 @@
-<mat-drawer-container class="example-container" autosize> 
-  <mat-icon fontIcon="home" (click)="irMenu()" class="custom-home"></mat-icon>
+<mat-drawer-container class="example-container" autosize>
+   <div class="header-container">
+    <div class="icon-group">
+      <button type="button" mat-button (click)="drawer.toggle()" class="menu-button">
+        <img src="../assets/menu-alt2-svgrepo-com.svg" alt="Menu" width="24" height="24">
+      </button>
+      <mat-icon fontIcon="home" (click)="irMenu()" class="custom-home"></mat-icon>
+    </div>
+  </div>
 
   <mat-drawer #drawer class="example-sidenav" mode="side">
+  <div class="drawer-content">
+    <!-- Seção do Perfil -->
+    <div class="profile-section">
+      <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-button">
+        <mat-icon>account_circle</mat-icon>
+        <span>Perfil</span>
+      </button>
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>person</mat-icon>
+          <span>Usuário: {{ userName }}</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
 
-    <button mat-button [matMenuTriggerFor]="profileMenu">Profile</button>
-    <mat-menu #profileMenu="matMenu">
-      <button mat-menu-item disabled>Usuário: {{ userName }}</button>
-      <button mat-menu-item (click)="logout()">Logout</button>
-    </mat-menu>
+    <div class="main-menu">
+      <button mat-raised-button (click)="cadastroFuncionario()" class="menu-button">
+        <mat-icon>person_add</mat-icon>
+        <span>Cadastro de Funcionário</span>
+      </button>
 
-     <div class="example-button-row button-custom">
-    <button mat-raised-button (click)="cadastroFuncionario()">Cadastro de
-      Funcionário</button> <br>
-    <button mat-raised-button (click)="atualizarFuncionario()">Atualizar
-      Cadastro</button> <br>
-    <button mat-raised-button (click)="listaFuncionarios()">Lista de
-      Funcionários</button> <br>
-    <button mat-raised-button (click)="configuracoes()">Configurações</button>
+      <button mat-raised-button (click)="atualizarFuncionario()" class="menu-button">
+        <mat-icon>edit</mat-icon>
+        <span>Atualizar Cadastro</span>
+      </button>
+
+      <button mat-raised-button (click)="listaFuncionarios()" class="menu-button">
+        <mat-icon>list_alt</mat-icon>
+        <span>Lista de Funcionários</span>
+      </button>
+
+      <button mat-raised-button (click)="configuracoes()" class="menu-button">
+        <mat-icon>settings</mat-icon>
+        <span>Configurações</span>
+      </button>
+    </div>
   </div>
-  </mat-drawer>
+</mat-drawer>
 
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      <span class="svg-icon">
-        <img src="../assets/menu-alt2-svgrepo-com.svg" alt="Abrir Menu" width="24" height="24" />
-      </span>
-    </button>
+  <div class="main-content">
+    <router-outlet></router-outlet>
   </div>
-  <router-outlet></router-outlet>
 </mat-drawer-container>
-
-
-
-
-
-

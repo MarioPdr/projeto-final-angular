@@ -8,7 +8,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AtualizarFuncionarioComponent } from './components/atualizar-funcionario/atualizar-funcionario.component';
 
 const routes: Routes = [
-  { path: 'cadastrofuncionario', component: CadastroFuncionario },
   { path: 'atualizar-funcionario', component: AtualizarFuncionarioComponent },
   {
     path: 'menu',
@@ -16,7 +15,9 @@ const routes: Routes = [
     children: [
       { path: 'configuracoes', component: ConfiguracoesComponent },
       { path: 'listafuncionarios', component: ListaFuncionariosComponent },
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'cadastrofuncionario', component: CadastroFuncionario },
+      { path: 'atualizarfuncionario', component: AtualizarFuncionarioComponent }
     ]
   }
 ];

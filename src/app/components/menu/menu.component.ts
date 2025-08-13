@@ -34,11 +34,11 @@ export class MenuComponent {
   }
 
   cadastroFuncionario() {
-    this.router.navigate(['/cadastrofuncionario']);
+    this.router.navigate(['/menu/cadastrofuncionario']);
   }
 
   atualizarFuncionario() {
-    this.router.navigate(['/atualizarfuncionario']);
+    this.router.navigate(['/menu/atualizarfuncionario']);
   }
   showFiller = false;
 }

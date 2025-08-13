@@ -1,26 +1,22 @@
-/* Container principal */
 .example-container {
   width: 100%;
   height: 100vh;
 }
 
-/* Cabeçalho - alinhado à esquerda */
 .header-container {
   padding: 10px 15px;
   background-color: #f5f5f5;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
-  justify-content: flex-start; /* Alinha tudo à esquerda */
+  justify-content: flex-start; 
 }
 
-/* Grupo de ícones - lado a lado */
 .icon-group {
   display: flex;
   align-items: center;
-  gap: 12px; /* Espaço entre os ícones */
+  gap: 12px; 
 }
 
-/* Estilo dos ícones */
 .menu-button {
   padding: 0;
   min-width: auto;
@@ -30,16 +26,14 @@
 .custom-home {
   cursor: pointer;
   color: #3f51b5;
-  font-size: 24px; /* Tamanho igual ao ícone do menu */
+  font-size: 24px; 
   width: 24px;
   height: 24px;
 }
 
-/* Drawer e conteúdo (mantidos do exemplo anterior) */
 .example-sidenav { width: 250px; padding: 20px; }
 .main-content { padding: 20px; }
 
-/* Container do Drawer */
 .example-sidenav {
   width: 280px;
   padding: 0;
@@ -52,7 +46,6 @@
   height: 100%;
 }
 
-/* Seção do Perfil */
 .profile-section {
   padding: 16px;
   background-color: #f5f5f5;
@@ -68,7 +61,6 @@
   padding: 8px;
 }
 
-/* Menu Principal */
 .main-menu {
   padding: 8px;
   display: flex;
@@ -93,7 +85,6 @@
   background-color: #f0f0f0;
 }
 
-/* Ajustes para os itens do menu */
 .mat-menu-item {
   display: flex;
   align-items: center;

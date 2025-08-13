@@ -8,7 +8,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AtualizarFuncionarioComponent } from './components/atualizar-funcionario/atualizar-funcionario.component';
 
 const routes: Routes = [
-  { path: 'atualizar-funcionario', component: AtualizarFuncionarioComponent },
   {
     path: 'menu',
     component: MenuComponent,

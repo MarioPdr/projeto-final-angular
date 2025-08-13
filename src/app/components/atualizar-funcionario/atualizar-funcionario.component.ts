@@ -16,15 +16,25 @@ export class AtualizarFuncionarioComponent implements OnInit {
     vt: new FormControl('', Validators.required)
   });
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
         console.log('ID editado:', id);
       }
     });
+
+    const state = history.state;
+    if (state) {
+      this.atualizarForm.patchValue({
+        nomecompleto: state.nome,
+        salario: state.salario,
+        cargo: state.cargo,
+        vt: state.vt
+      });
+    }
   }
 
   enviar() {

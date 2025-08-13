@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,12 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   userName = 'Pedro';
 
   logout() {
     console.log('Usuário deslogado');
+    this.auth.logout();
     this.router.navigate(['/login']);
   }
 
@@ -40,5 +42,5 @@ export class MenuComponent {
   atualizarFuncionario() {
     this.router.navigate(['/menu/atualizarfuncionario']);
   }
-  showFiller = false;
 }
+

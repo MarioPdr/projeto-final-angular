@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./lista-funcionarios.component.css']
 })
 export class ListaFuncionariosComponent {
-  funcionarios: string[] = ['id', 'nome', 'cpf', 'cargo_atual', 'salario_atual', 'opcaoVT'];
+  funcionarios: string[] = ['id', 'nome', 'cpf', 'cargo_atual', 'salario_atual', 'opcaoVT', 'verDetalhes'];
   informacoes = [
     {
       id: 1025,
@@ -28,7 +28,15 @@ export class ListaFuncionariosComponent {
   ];
   constructor(private router: Router) { }
 
-  editarFuncionario(id: number) {
-    this.router.navigate(['/atualizar-funcionario'], { queryParams: { id } });
-  }
+editarFuncionario(funcionario: any) {
+  this.router.navigate(['/menu/atualizarfuncionario', funcionario.id], {
+    state: { 
+      nome: funcionario.nome, 
+      cargo: funcionario.cargo_atual, 
+      salario: funcionario.salario_atual, 
+      vt: funcionario.opcaoVT 
+    }  });
 }
+
+}
+

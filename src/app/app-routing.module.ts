@@ -6,17 +6,22 @@ import { ListaFuncionariosComponent } from './components/lista-funcionarios/list
 import { MenuComponent } from './components/menu/menu.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AtualizarFuncionarioComponent } from './components/atualizar-funcionario/atualizar-funcionario.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {
     path: 'menu',
     component: MenuComponent,
     children: [
       { path: 'configuracoes', component: ConfiguracoesComponent },
-      { path: 'listafuncionarios', component: ListaFuncionariosComponent },
+      { path: 'listafuncionarios', component: ListaFuncionariosComponent, 
+        canActivate: [AuthGuard]
+       },
       { path: 'profile', component: ProfileComponent },
       { path: 'cadastrofuncionario', component: CadastroFuncionario },
-      { path: 'atualizarfuncionario', component: AtualizarFuncionarioComponent }
+      { path: 'atualizarfuncionario/:id', component: AtualizarFuncionarioComponent }
     ]
   }
 ];

@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -40,7 +41,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     ComponentLifecycleComponent,
     AtualizarFuncionarioComponent,
     MenuComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

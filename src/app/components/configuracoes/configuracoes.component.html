@@ -1,1 +1,35 @@
-<p>Configuracoes</p>
+<div class="config-container">
+  <h2>Configurações do Sistema</h2>
+  
+  <form (ngSubmit)="saveSettings()">
+    <mat-card class="setting-card">
+      <mat-card-header>
+        <mat-card-title>Preferências</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="setting-item">
+          <mat-slide-toggle [(ngModel)]="settings.notifications" name="notifications">
+            Notificações
+          </mat-slide-toggle>
+        </div>
+        
+        <div class="setting-item">
+          <mat-slide-toggle [(ngModel)]="settings.emailUpdates" name="emailUpdates">
+            Atualizações por e-mail
+          </mat-slide-toggle>
+        </div>
+        
+        <div class="setting-item">
+          <mat-slide-toggle [(ngModel)]="settings.darkMode" name="darkMode">
+            Modo escuro
+          </mat-slide-toggle>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">
+          Salvar Configurações
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

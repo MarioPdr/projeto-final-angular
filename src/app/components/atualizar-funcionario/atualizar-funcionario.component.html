@@ -1,53 +1,66 @@
-<form [formGroup]="atualizarForm" (ngSubmit)="enviar()" class="form-container">
-  <mat-form-field appearance="outline">
-    <mat-label>Nome Completo</mat-label>
-    <input matInput formControlName="nomecompleto" placeholder="Digite o nome completo">
-    <mat-error *ngIf="atualizarForm.get('nomecompleto')?.errors?.['required']">
-      Nome é obrigatório
-    </mat-error>
-    <mat-error *ngIf="atualizarForm.get('nomecompleto')?.errors?.['minlength']">
-      Nome deve conter pelo menos 10 caracteres
-    </mat-error>
-  </mat-form-field> <br>
+<div class="form-container">
+  <h2>Atualizar Funcionário</h2>
+  
+  <form [formGroup]="atualizarForm" (ngSubmit)="enviar()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput formControlName="nomeCompleto" placeholder="Digite o nome completo">
+      <mat-error *ngIf="atualizarForm.get('nomeCompleto')?.errors?.['required']">
+        Nome é obrigatório
+      </mat-error>
+      <mat-error *ngIf="atualizarForm.get('nomeCompleto')?.errors?.['minlength']">
+        Nome deve conter pelo menos 10 caracteres
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Salário</mat-label>
-    <input matInput type="number" formControlName="salario" placeholder="Digite o salário">
-    <mat-error *ngIf="atualizarForm.get('salario')?.errors?.['required']">
-      Salário é obrigatório
-    </mat-error>
-    <mat-error *ngIf="atualizarForm.get('salario')?.errors?.['min']">
-      Salário deve ser maior que 1518
-    </mat-error>
-  </mat-form-field> <br>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Salário</mat-label>
+      <input matInput type="number" formControlName="salario" placeholder="Digite o salário">
+      <mat-error *ngIf="atualizarForm.get('salario')?.errors?.['required']">
+        Salário é obrigatório
+      </mat-error>
+      <mat-error *ngIf="atualizarForm.get('salario')?.errors?.['min']">
+        Salário deve ser maior que R$ 1.518,00
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Cargo</mat-label>
-    <input matInput formControlName="cargo" placeholder="Digite o cargo">
-    <mat-error *ngIf="atualizarForm.get('cargo')?.errors?.['required']">
-      Cargo é obrigatório
-    </mat-error>
-  </mat-form-field> <br>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cargo</mat-label>
+      <input matInput formControlName="cargo" placeholder="Digite o cargo">
+      <mat-error *ngIf="atualizarForm.get('cargo')?.errors?.['required']">
+        Cargo é obrigatório
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Número de Dependentes</mat-label>
-    <input matInput type="number" formControlName="numerodependentes" placeholder="Digite o número">
-    <mat-error *ngIf="atualizarForm.get('numerodependentes')?.errors?.['required']">
-      Dependentes é obrigatório
-    </mat-error>
-    <mat-error *ngIf="atualizarForm.get('numerodependentes')?.errors?.['min'] || atualizarForm.get('numerodependentes')?.errors?.['max']">
-      Dependentes mínimo é 0 e máximo é 4
-    </mat-error>
-  </mat-form-field> <br>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Número de Dependentes</mat-label>
+      <input matInput type="number" formControlName="numeroDependentes" placeholder="Digite o número">
+      <mat-error *ngIf="atualizarForm.get('numeroDependentes')?.errors?.['required']">
+        Número de dependentes é obrigatório
+      </mat-error>
+      <mat-error *ngIf="atualizarForm.get('numeroDependentes')?.errors?.['min'] || atualizarForm.get('numeroDependentes')?.errors?.['max']">
+        Número de dependentes deve ser entre 0 e 4
+      </mat-error>
+    </mat-form-field>
+   
+    <div class="radio-group-container">
+      <mat-label>Vale Transporte</mat-label>
+      <mat-radio-group formControlName="vt" class="radio-group">
+        <mat-radio-button value="true">Sim</mat-radio-button>
+        <mat-radio-button value="false">Não</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="atualizarForm.get('vt')?.errors?.['required']" class="radio-error">
+        Vale Transporte é obrigatório
+      </mat-error>
+    </div>
 
-  <mat-label>Vale Transporte</mat-label>
-  <mat-radio-group formControlName="vt" class="radio-group">
-    <mat-radio-button value="Sim">Sim</mat-radio-button>
-    <mat-radio-button value="Não">Não</mat-radio-button>
-  </mat-radio-group>
-  <mat-error *ngIf="atualizarForm.get('vt')?.errors?.['required']" class="radio-error">
-    Vale Transporte é obrigatório
-  </mat-error> <br>
-
-  <button mat-raised-button color="primary" type="submit">Atualizar</button>
-</form>
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!atualizarForm.valid">
+        Atualizar
+      </button>
+      <button mat-button type="button" (click)="atualizarForm.reset()">
+        Limpar
+      </button>
+    </div>
+  </form>
+</div>

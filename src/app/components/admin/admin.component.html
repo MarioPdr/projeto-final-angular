@@ -1,3 +1,34 @@
-<router-outlet></router-outlet>
-<button (click)="irParaConfiguracoes()">Configurações</button>
-<button (click)="irParaFuncionarios()">Lista de Funcionarios</button>
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>Painel {{ isAdmin ? 'Administrativo' : 'do Funcionário' }}</h1>
+    <div class="user-info">
+      <p>Bem-vindo, {{ usuario }} ({{ nivel }})</p>
+      <button mat-raised-button color="warn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Sair
+      </button>
+    </div>
+  </div>
+
+  <div class="admin-actions">
+    <button mat-raised-button color="primary" (click)="irParaConfiguracoes()">
+      <mat-icon>settings</mat-icon>
+      Configurações
+    </button>
+    <button mat-raised-button color="accent" (click)="irParaFuncionarios()">
+      <mat-icon>list_alt</mat-icon>
+      Lista de Funcionários
+    </button>
+    
+    <button 
+      *ngIf="isAdmin"
+      mat-raised-button 
+      color="primary" 
+      (click)="irParaCadastro()">
+      <mat-icon>person_add</mat-icon>
+      Cadastrar Funcionário
+    </button>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

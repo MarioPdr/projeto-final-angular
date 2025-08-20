@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,16 +9,23 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent {
   usuario: any;
-  nivel: "admin" | undefined;
+  nivel: any;
+  isAdmin: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.usuario = history.state.usuario;
-    this.nivel = history.state.nivel;
+    const usuarioLogado = this.authService.getUsuario();
     
-    if (this.nivel !== 'admin') {
-      console.log('Acesso negado. Somente administradores podem acessar.');
+    if (usuarioLogado) {
+      this.usuario = usuarioLogado.nome;
+      this.nivel = usuarioLogado.role;
+      this.isAdmin = this.authService.isAdmin();
+    } else {
+      console.log('Usuário não autenticado. Redirecionando para home...');
       this.router.navigate(['/home']);
     }
   }
@@ -27,6 +35,14 @@ export class AdminComponent {
   }
 
   irParaFuncionarios() {
-    this.router.navigate(['/admin/lista']);
+    this.router.navigate(['/admin/lista-funcionarios']);
+  }
+
+  irParaCadastro() {
+    this.router.navigate(['/admin/cadastro-funcionario']);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

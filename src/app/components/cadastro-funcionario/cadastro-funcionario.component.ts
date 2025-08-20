@@ -1,38 +1,59 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { FuncionarioService } from 'src/app/services/funcionario.service';
 
 @Component({
   selector: 'app-cadastro-funcionario',
-  standalone: false,
   templateUrl: './cadastro-funcionario.html',
   styleUrls: ['./cadastro-funcionario.css']
 })
-export class CadastroFuncionario {
+export class CadastroFuncionarioComponent {
   cadastroForm = new FormGroup({
-    nomecompleto: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    nomeCompleto: new FormControl('', [Validators.required, Validators.minLength(10)]),
     salario: new FormControl('', [Validators.required, Validators.min(1518)]),
     cargo: new FormControl('', Validators.required),
-    numerodependentes: new FormControl('', [Validators.required, Validators.min(0), Validators.max(4)]),
+    numeroDependentes: new FormControl('', [Validators.required, Validators.min(0), Validators.max(4)]),
     vt: new FormControl('', Validators.required)
   });
 
+  usuario: any;
+  nivel: any;
+  isAdmin: boolean = false;
 
-enviar() {
-  if (this.cadastroForm.valid) {
-    console.log('Cadastro feito com sucesso!', this.cadastroForm.value);
-  } else {
-    console.log('Formulario inválido.');
+  constructor(
+    public auth: AuthService, 
+    private funcionarioService: FuncionarioService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    const usuarioLogado = this.auth.getUsuario();
+    
+    if (usuarioLogado) {
+      this.usuario = usuarioLogado.nome;
+      this.nivel = usuarioLogado.role;
+      this.isAdmin = this.auth.isAdmin();
+      
+      if (!this.isAdmin) {
+        console.log('Acesso negado. Apenas administradores podem cadastrar funcionários.');
+        this.router.navigate(['/admin/lista-funcionarios']);
+      }
+    } else {
+      console.log('Usuário não autenticado. Redirecionando para home...');
+      this.router.navigate(['/home']);
+    }
   }
-}
 
-usuario: any;
-nivel: any;
-
-ngOnInit(): void {
-  this.usuario = history.state.usuario;
-  this.nivel = history.state.nivel;
-  console.log(this.usuario, this.nivel);
-}
-
+  enviar() {
+    if (this.cadastroForm.valid) {
+      const funcionario = this.cadastroForm.value;
+      this.funcionarioService.adicionarFuncionario(funcionario);
+      console.log('Funcionário cadastrado com sucesso!', funcionario);
+      this.router.navigate(['/admin/lista-funcionarios']);
+    } else {
+      console.log('Formulário inválido.');
+    }
+  }
 }

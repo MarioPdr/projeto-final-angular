@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
+  isAdmin: boolean = false;
   constructor(private router: Router, private auth: AuthService) { }
 
   userName = 'Pedro';
@@ -22,7 +23,7 @@ export class MenuComponent {
     console.log('Item 2 selecionado');
   }
 
-  irMenu(){
+  irMenu() {
     this.router.navigate(['/menu']);
   }
 
@@ -41,6 +42,19 @@ export class MenuComponent {
 
   atualizarFuncionario() {
     this.router.navigate(['/menu/atualizarfuncionario']);
+  }
+
+  checarRole() {
+   if(this.auth.estaLogado() && this.auth.temRole('admin')) {
+    this.isAdmin = true;
+   } else {
+    this.isAdmin = false; 
+    }
+  }
+
+
+  ngOnInit() {
+    this.checarRole();
   }
 }
 

@@ -1,58 +1,63 @@
-<table mat-table [dataSource]="informacoes" class="mat-elevation-z8">
+<div class="table-container">
+  <div class="table-header">
+    <h2>Lista de Funcionários</h2>
+    <button 
+      *ngIf="isAdmin"
+      mat-raised-button 
+      color="primary" 
+      (click)="novoFuncionario()">
+      <mat-icon>add</mat-icon>
+      Novo Funcionário
+    </button>
+  </div>
+  
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-  </ng-container>
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="nome">
-    <th mat-header-cell *matHeaderCellDef>Nome</th>
-    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row)">{{ row.nome }}</td>
-  </ng-container>
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef>CPF</th>
+        <td mat-cell *matCellDef="let element">{{ element.cpf }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="cpf">
-    <th mat-header-cell *matHeaderCellDef>CPF</th>
-    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row)">{{ row.cpf }}</td>
-  </ng-container>
+      <ng-container matColumnDef="cargo">
+        <th mat-header-cell *matHeaderCellDef>Cargo</th>
+        <td mat-cell *matCellDef="let element">{{ element.cargo_atual }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="cargo_atual">
-    <th mat-header-cell *matHeaderCellDef>Cargo</th>
-    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row)">{{ row.cargo_atual }}</td>
-  </ng-container>
+      <ng-container matColumnDef="salario">
+        <th mat-header-cell *matHeaderCellDef>Salário</th>
+        <td mat-cell *matCellDef="let element">R$ {{ element.salario_atual | number:'1.2-2' }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="salario_atual">
-    <th mat-header-cell *matHeaderCellDef>Salário</th>
-    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row)">R$ {{ row.salario_atual }}</td>
-  </ng-container>
+      <ng-container matColumnDef="vt">
+        <th mat-header-cell *matHeaderCellDef>VT</th>
+        <td mat-cell *matCellDef="let element">{{ element.opcaoVT ? 'Sim' : 'Não' }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="opcaoVT">
-    <th mat-header-cell *matHeaderCellDef>VT</th>
-    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row)">{{ row.opcaoVT ? 'Sim' : 'Não' }}</td>
-  </ng-container>
+      <ng-container *ngIf="isAdmin" matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="editarFuncionario(element)" title="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
 
-  <ng-container matColumnDef="verDetalhes">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let row" (click)="editarFuncionario(row)">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-eye"
-        viewBox="0 0 16 16"
-        label="Visualizar"
-      >
-        <path
-          d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"
-        />
-        <path
-          d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
-        />
-      </svg>
-    </td>
-  </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
 
-  <tr mat-header-row *matHeaderRowDef="funcionarios"></tr>
-  <tr mat-row *matRowDef="let row; columns: funcionarios;"></tr>
-
-</table>
+  <div *ngIf="dataSource.length === 0" class="no-data">
+    <p>Nenhum funcionário cadastrado.</p>
+  </div>
+</div>

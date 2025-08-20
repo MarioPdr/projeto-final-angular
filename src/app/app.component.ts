@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +6,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-test';
+  title = 'Sistema de Gerenciamento de Funcionários';
   
-  constructor(private router: Router) {}
-  ngOnInit() {
-    this.router.navigate(['/login']);
-  }
 }
   

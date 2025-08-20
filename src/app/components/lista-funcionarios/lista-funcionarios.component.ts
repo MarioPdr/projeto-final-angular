@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { FuncionarioService } from 'src/app/services/funcionario.service';
 
 @Component({
   selector: 'app-lista-funcionarios',
@@ -7,36 +9,50 @@ import { Router } from '@angular/router';
   styleUrls: ['./lista-funcionarios.component.css']
 })
 export class ListaFuncionariosComponent {
-  funcionarios: string[] = ['id', 'nome', 'cpf', 'cargo_atual', 'salario_atual', 'opcaoVT', 'verDetalhes'];
-  informacoes = [
-    {
-      id: 1025,
-      nome: 'João da Silva',
-      cpf: '123.456.789-00',
-      cargo_atual: 'Gerente de Projetos',
-      salario_atual: 12000,
-      opcaoVT: true
-    },
-    {
-      id: 1026,
-      nome: 'Maria Oliveira',
-      cpf: '987.654.321-00',
-      cargo_atual: 'Analista de Sistemas',
-      salario_atual: 6500,
-      opcaoVT: false
+  displayedColumns: string[] = ['id', 'nome', 'cpf', 'cargo', 'salario', 'vt'];
+  dataSource: any[] = [];
+  usuario: any;
+  nivel: any;
+  isAdmin: boolean = false;
+
+  constructor(
+    private funcionarioService: FuncionarioService,
+    private router: Router,
+    private authService: AuthService
+  ) { }
+
+  ngOnInit() {
+    const usuarioLogado = this.authService.getUsuario();
+    
+    if (usuarioLogado) {
+      this.usuario = usuarioLogado.nome;
+      this.nivel = usuarioLogado.role;
+      this.isAdmin = this.authService.isAdmin();
+      
+      if (this.isAdmin) {
+        this.displayedColumns = [...this.displayedColumns, 'acoes'];
+      }
+    } else {
+      console.log('Usuário não autenticado. Redirecionando para home...');
+      this.router.navigate(['/home']);
     }
-  ];
-  constructor(private router: Router) { }
 
-editarFuncionario(funcionario: any) {
-  this.router.navigate(['/menu/atualizarfuncionario', funcionario.id], {
-    state: { 
-      nome: funcionario.nome, 
-      cargo: funcionario.cargo_atual, 
-      salario: funcionario.salario_atual, 
-      vt: funcionario.opcaoVT 
-    }  });
+    this.dataSource = this.funcionarioService.getFuncionarios();
+  }
+
+  editarFuncionario(funcionario: any) {
+    this.router.navigate(['/admin/atualizar-funcionario', funcionario.id], {
+      state: { 
+        nome: funcionario.nome, 
+        cargo: funcionario.cargo_atual, 
+        salario: funcionario.salario_atual, 
+        vt: funcionario.opcaoVT,
+        numeroDependentes: funcionario.numeroDependentes
+      }
+    });
+  }
+
+  novoFuncionario() {
+    this.router.navigate(['/admin/cadastro-funcionario']);
+  }
 }
-
-}
-

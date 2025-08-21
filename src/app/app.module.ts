@@ -21,6 +21,8 @@ import { ConfiguracoesComponent } from './components/configuracoes/configuracoes
 import { ListaFuncionariosComponent } from './components/lista-funcionarios/lista-funcionarios.component';
 import { CadastroFuncionarioComponent } from './components/cadastro-funcionario/cadastro-funcionario.component';
 import { AtualizarFuncionarioComponent } from './components/atualizar-funcionario/atualizar-funcionario.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { AtualizarFuncionarioComponent } from './components/atualizar-funcionari
     MatDividerModule,
     MatSidenavModule,
     MatCardModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

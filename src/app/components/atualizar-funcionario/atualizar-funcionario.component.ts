@@ -24,20 +24,20 @@ export class AtualizarFuncionarioComponent implements OnInit {
   isAdmin: boolean = false;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     public auth: AuthService,
     private funcionarioService: FuncionarioService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     const usuarioLogado = this.auth.getUsuario();
-    
+
     if (usuarioLogado) {
       this.usuario = usuarioLogado.nome;
       this.nivel = usuarioLogado.role;
       this.isAdmin = this.auth.isAdmin();
-      
+
       if (!this.isAdmin) {
         console.log('Acesso negado. Apenas administradores podem editar funcionários.');
         this.router.navigate(['/admin/lista-funcionarios']);
@@ -52,21 +52,25 @@ export class AtualizarFuncionarioComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.funcionarioId = +params['id'];
       if (this.funcionarioId) {
-        const funcionario = this.funcionarioService.getFuncionarioPorId(this.funcionarioId);
-        if (funcionario) {
-          this.atualizarForm.patchValue({
-            nomeCompleto: funcionario.nome,
-            salario: funcionario.salario_atual.toString(),
-            cargo: funcionario.cargo_atual,
-            numeroDependentes: funcionario.numeroDependentes.toString(),
-            vt: funcionario.opcaoVT.toString()
-          });
-        }
+        this.funcionarioService.getFuncionarioPorId(this.funcionarioId).subscribe({
+          next: (funcionario) => {
+            if (funcionario) {
+              this.atualizarForm.patchValue({
+                nomeCompleto: funcionario.nome,
+                salario: funcionario.salario_atual.toString(),
+                cargo: funcionario.cargo_atual,
+                numeroDependentes: funcionario.numeroDependentes.toString(),
+                vt: funcionario.opcaoVT.toString()
+              });
+            }
+          },
+          error: (err) => console.error('Erro ao carregar funcionário:', err)
+        });
       }
     });
 
     const state = history.state;
-    if (state) {
+    if (state && state.nome) {
       this.atualizarForm.patchValue({
         nomeCompleto: state.nome,
         salario: state.salario,
@@ -79,10 +83,23 @@ export class AtualizarFuncionarioComponent implements OnInit {
 
   enviar() {
     if (this.atualizarForm.valid && this.funcionarioId) {
-      const funcionario = this.atualizarForm.value;
-      this.funcionarioService.atualizarFuncionario(this.funcionarioId, funcionario);
-      console.log('Funcionário atualizado com sucesso!', funcionario);
-      this.router.navigate(['/admin/lista-funcionarios']);
+      const formValue = this.atualizarForm.value;
+
+      const funcionario = {
+        nome: formValue.nomeCompleto,
+        cargo_atual: formValue.cargo,
+        salario_atual: Number(formValue.salario),
+        opcaoVT: formValue.vt === 'true',
+        numeroDependentes: Number(formValue.numeroDependentes)
+      };
+
+      this.funcionarioService.atualizarFuncionario(this.funcionarioId, funcionario).subscribe({
+        next: () => {
+          console.log('Funcionário atualizado com sucesso!', funcionario);
+          this.router.navigate(['/admin/lista-funcionarios']);
+        },
+        error: (err) => console.error('Erro ao atualizar funcionário:', err)
+      });
     } else {
       console.log('Formulário inválido.');
     }

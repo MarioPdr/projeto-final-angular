@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,7 +9,7 @@ import { FuncionarioService } from 'src/app/services/funcionario.service';
   templateUrl: './cadastro-funcionario.html',
   styleUrls: ['./cadastro-funcionario.css']
 })
-export class CadastroFuncionarioComponent {
+export class CadastroFuncionarioComponent implements OnInit {
   cadastroForm = new FormGroup({
     nomeCompleto: new FormControl('', [Validators.required, Validators.minLength(10)]),
     salario: new FormControl('', [Validators.required, Validators.min(1518)]),
@@ -26,7 +26,7 @@ export class CadastroFuncionarioComponent {
     public auth: AuthService, 
     private funcionarioService: FuncionarioService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const usuarioLogado = this.auth.getUsuario();
@@ -48,10 +48,24 @@ export class CadastroFuncionarioComponent {
 
   enviar() {
     if (this.cadastroForm.valid) {
-      const funcionario = this.cadastroForm.value;
-      this.funcionarioService.adicionarFuncionario(funcionario);
-      console.log('Funcionário cadastrado com sucesso!', funcionario);
-      this.router.navigate(['/admin/lista-funcionarios']);
+      const formValue = this.cadastroForm.value;
+
+      const funcionario = {
+        nome: formValue.nomeCompleto,
+        cpf: '',
+        cargo_atual: formValue.cargo,
+        salario_atual: Number(formValue.salario),
+        opcaoVT: formValue.vt === 'true',
+        numeroDependentes: Number(formValue.numeroDependentes)
+      };
+
+      this.funcionarioService.adicionarFuncionario(funcionario).subscribe({
+        next: () => {
+          console.log('Funcionário cadastrado com sucesso!', funcionario);
+          this.router.navigate(['/admin/lista-funcionarios']);
+        },
+        error: (err) => console.error('Erro ao cadastrar funcionário:', err)
+      });
     } else {
       console.log('Formulário inválido.');
     }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
@@ -8,27 +8,27 @@ import { FuncionarioService } from 'src/app/services/funcionario.service';
   templateUrl: './lista-funcionarios.component.html',
   styleUrls: ['./lista-funcionarios.component.css']
 })
-export class ListaFuncionariosComponent {
+export class ListaFuncionariosComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'cargo', 'salario', 'vt'];
   dataSource: any[] = [];
-  usuario: any;
-  nivel: any;
+  usuario: string = '';
+  nivel: string = '';
   isAdmin: boolean = false;
 
   constructor(
     private funcionarioService: FuncionarioService,
     private router: Router,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const usuarioLogado = this.authService.getUsuario();
-    
+
     if (usuarioLogado) {
       this.usuario = usuarioLogado.nome;
       this.nivel = usuarioLogado.role;
       this.isAdmin = this.authService.isAdmin();
-      
+
       if (this.isAdmin) {
         this.displayedColumns = [...this.displayedColumns, 'acoes'];
       }
@@ -37,7 +37,14 @@ export class ListaFuncionariosComponent {
       this.router.navigate(['/home']);
     }
 
-    this.dataSource = this.funcionarioService.getFuncionarios();
+    this.funcionarioService.getFuncionarios().subscribe({
+      next: (data) => {
+        this.dataSource = data;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar funcionários:', err);
+      }
+    });
   }
 
   editarFuncionario(funcionario: any) {
